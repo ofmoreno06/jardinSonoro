@@ -1,46 +1,67 @@
-/* OpenProcessing Tweak of *@*http://www.openprocessing.org/sketch/312*@* */
-/* !do not delete the line above, required for linking your tweak if you upload again */
+/*--------------------------------------------------------------------------
+
+  SKETCH:       flowers
+  AUTOR:        ACORDE
+  FECHA:        marzo-2014
+
+  DESCRIPCION:  este es un programa desarrollado para proectarse junto con
+                la instalacion de un jardin sonoro, en el cual se activan
+                ciertas funciones cuado se tocan las plantas. Este sketch
+                en particular hace aparecer en pantalla flores que crecen
+                con un disparador (teclas, ckick, etc.) y luego se desva-
+                necen. 
+--------------------------------------------------------------------------*/
 
 
-ArrayList<Flores> f1;
 
+/*  Declaracion del Arraylits de nombre 'arrayFlores' que contiene 
+    ojetos de la clase 'Flor' */
+ArrayList<Flor> arrayFlores;
+//-------------------------------------------------------------------------*
+ 
+
+//--------------------------
+// ###^^**** SETUP ****^^###
+//--------------------------
 void setup() 
 {
-  size(640, 480, P3D);
-  background(0);
-  frameRate(100);
+  size(640, 480);  //tamano de pantalla
+  background(0);   //color del fondo
+  frameRate(25);   //tasa de actualizacion
 
-  f1 = new ArrayList <Flores>();
+  arrayFlores = new ArrayList <Flor>();   //crea el Arralist vacio
 }
+//-------------------------------------------------------------------------*
 
+
+//---------------------------------------
+// ###^^**** MAIN PROGRAM ****^^###
+//---------------------------------------
 void draw() 
 {
-  smooth();
-  background(0);
+  //smooth();       // antialiasing        
+  background(0);    // color de fondo en cada frame  
 
-  for (int i=f1.size()-1;  i>=0; i-- )
+  for ( int i = arrayFlores.size() - 1;  i >= 0; i-- )
   {
-    Flores flor = f1.get(i);
+    Flor flor = arrayFlores.get(i);
     pushMatrix();
     flor.crecer();
     //flor.posicion(); 
     popMatrix();
-    
-    /*
-    if (flor.overCircle == true)
-    {
-      f1.remove(i);
-    }
-    else
-    {
-      f1.add(new Flores(random(100 + width-100), random(100 + height-100) ) );
-    }
-    */
   }
 }   
+//-------------------------------------------------------------------------*
 
+
+//------------------------------
+// ###^^**** FUNCIONES ****^^###
+//------------------------------
+
+/* Cuando una tecla es presionada aparece una nueva flor en la
+   posicion del mouse */
 void keyPressed()
 {
-  f1.add(new Flores(mouseX, mouseY) );
+  arrayFlores.add(new Flor(mouseX, mouseY) );
 }
-
+//---------------------------------------------------------------
